@@ -64,6 +64,11 @@ class System:
         machine = platform.machine()
         if machine == "arm64":
             return "ARM64"
+        if machine == "aarch64":
+            return "ARM64"
+        if machine == "armhf" or machine == "armv7l": # armv8 or armv7 32-bit arch
+            return "ARM32"
+        
         return "Unknown"
 
     @classmethod
