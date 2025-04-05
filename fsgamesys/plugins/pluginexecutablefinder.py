@@ -20,7 +20,11 @@ class PluginExecutableFinder:
 
 X86_MACHINES = ["x86", "i386", "i486", "i586", "i686"]
 X86_64_MACHINES = ["x86_64", "x86-64", "amd64"]
+ARM_64_MACHINES = ["aarch64", "arm64"]
+ARM_32_MACHINES = ["armhf", "armv8", "armv7l", "armv7", "armv6"]
+
 X86_ANY_MACHINES = X86_MACHINES + X86_64_MACHINES
+ARM_ANY_MACHINES = ARM_32_MACHINES + ARM_64_MACHINES
 
 # Mapping between executable name and plugin
 KNOWN_EXECUTABLES = {
@@ -193,9 +197,11 @@ def arch_name() -> str:
             return "x86-64"
         else:
             return "x86"
-    elif machine == "arm64":
-        return "ARM64"
-    # FIXME: arm7/8 and ARM64
+    elif machine in ARM_ANY_MACHINES:
+        if platform.architecture()[0] == "64bit":
+            return "ARM64"
+        else:
+            return "ARM32"
     return "Unknown"
 
 

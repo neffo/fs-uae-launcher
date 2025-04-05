@@ -33,6 +33,13 @@ def is_x86_family() -> bool:
 def is_x86_64() -> bool:
     return is_64_bit() and is_x86_family()
 
+X86_MACHINES = ["x86", "i386", "i486", "i586", "i686"]
+X86_64_MACHINES = ["x86_64", "x86-64", "amd64"]
+ARM_64_MACHINES = ["aarch64", "arm64"]
+ARM_32_MACHINES = ["armhf", "armv8", "armv7l", "armv7", "armv6"]
+
+X86_ANY_MACHINES = X86_MACHINES + X86_64_MACHINES
+ARM_ANY_MACHINES = ARM_32_MACHINES + ARM_64_MACHINES
 
 class System:
     linux = is_linux()
@@ -59,16 +66,17 @@ class System:
 
     @classmethod
     def getCpuArchitecture(cls) -> str:
-        if is_x86_family():
-            return "x86-64" if is_64_bit() else "x86"
-        machine = platform.machine()
-        if machine == "arm64":
-            return "ARM64"
-        if machine == "aarch64":
-            return "ARM64"
-        if machine == "armhf" or machine == "armv7l": # armv8 or armv7 32-bit arch
-            return "ARM32"
-        
+        machine = platform.machine().lower()
+        if machine in X86_ANY_MACHINES:
+            if platform.architecture()[0] == "64bit":
+                return "x86-64"
+            else:
+                return "x86"
+        elif machine in ARM_ANY_MACHINES:
+            if platform.architecture()[0] == "64bit":
+                return "ARM64"
+            else:
+                return "ARM32"
         return "Unknown"
 
     @classmethod
