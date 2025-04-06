@@ -18,9 +18,7 @@ on:
       - amiga-live
 jobs:
   Linux_aarch64:
-    runs-on: ubuntu-18.04
-    env:
-      UPLOAD_ENABLED: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+    runs-on: ubuntu-22.04-arm
     steps:
       - uses: actions/checkout@v2
         with:
