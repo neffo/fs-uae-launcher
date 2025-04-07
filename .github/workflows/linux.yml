@@ -2,15 +2,9 @@ name: Linux
 on:
   push:
     branches:
-      - master
-      - beta
-      - stable
       - stable-amiga-live
   pull_request:
     branches:
-      - master
-      - beta
-      - stable
       - stable-amiga-live
 jobs:
   Linux_x86-64:
