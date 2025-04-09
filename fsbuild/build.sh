@@ -47,6 +47,10 @@ else
 		echo "rm $BINDIR/libfontconfig.so.1"
 		rm $BINDIR/libfontconfig.so.1
 	fi
+	if [ -f $BINDIR/libLLVM-15.so.1 ]; then
+		echo "rm $BINDIR/libLLVM-15.so.1"
+		rm $BINDIR/libLLVM-15.so.1
+	fi
 fi
 
 # These do not work with macOS notarization, but might as well remove for all
