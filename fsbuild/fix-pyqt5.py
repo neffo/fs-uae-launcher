@@ -22,11 +22,11 @@ def main():
             print("Removing", path)
             shutil.rmtree(path)
 
-    qmlPath = QLibraryInfo.location(QLibraryInfo.Qml2ImportsPath)
-    removePath(qmlPath)
+#    qmlPath = QLibraryInfo.location(QLibraryInfo.Qml2ImportsPath)
+#    removePath(qmlPath)
 
-    translationsPath = QLibraryInfo.location(QLibraryInfo.TranslationsPath)
-    removePath(translationsPath)
+#    translationsPath = QLibraryInfo.location(QLibraryInfo.TranslationsPath)
+#    removePath(translationsPath)
 
     pluginsPath = QLibraryInfo.location(QLibraryInfo.PluginsPath)
     print(pluginsPath)
@@ -38,8 +38,8 @@ def main():
             print("Removing", pluginTypePath)
             shutil.rmtree(pluginTypePath)
 
-    if sys.platform == "linux":
-        removePlugins("platformthemes")
+#    if sys.platform == "linux":
+#        removePlugins("platformthemes")
 
 
 if __name__ == "__main__":

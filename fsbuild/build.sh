@@ -7,7 +7,9 @@ BUILDDIR=fsbuild/_build
 
 # Remove files from PyQt5 that we don't want to bundle (before pyinstaller
 # pulls in their dependencies).
-python3 fsbuild/fix-pyqt5.py
+
+# disabled for amigalive build
+# python3 fsbuild/fix-pyqt5.py
 
 rm -Rf $BUILDDIR/pyinstaller
 if [ "$SYSTEM_OS" = "Windows" ]; then
@@ -45,8 +47,8 @@ fi
 
 # These do not work with macOS notarization, but might as well remove for all
 # platforms.
-rm -Rf $BINDIR/PyQt5/Qt/translations
-rm -Rf $BINDIR/PyQt5/Qt/qml
+#rm -Rf $BINDIR/PyQt5/Qt/translations
+#rm -Rf $BINDIR/PyQt5/Qt/qml
 
 # In case the Qt dir is Qt5...
 rm -Rf $BINDIR/PyQt5/Qt5/translations
