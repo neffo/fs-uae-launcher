@@ -2,14 +2,10 @@ name: macOS
 on:
   push:
     branches:
-      - master
-      - beta
-      - stable
+      - stable-amiga-live
   pull_request:
     branches:
-      - master
-      - beta
-      - stable
+      - stable-amiga-live
 jobs:
   macOS_x86-64:
     runs-on: macos-11
