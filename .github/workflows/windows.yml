@@ -2,20 +2,13 @@ name: Windows
 on:
   push:
     branches:
-      - master
-      - beta
-      - stable
+      - stable-amiga-live
   pull_request:
     branches:
-      - master
-      - beta
-      - stable
+      - stable-amiga-live
 jobs:
   Windows_x86-64:
-    runs-on: windows-2019
-
-    env:
-      UPLOAD_ENABLED: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+    runs-on: windows-latest
 
     defaults:
       run:
@@ -90,23 +83,3 @@ jobs:
       - name: Archive
         run: |
           fsbuild/archive
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Windows_x86-64
-          path: fsbuild/_dist/*
-
-      - name: Upload build to Dropbox folder
-        if: >-
-          env.UPLOAD_ENABLED != null && (
-            github.ref == 'refs/heads/master' ||
-            github.ref == 'refs/heads/dev' ||
-            github.ref == 'refs/heads/beta' ||
-            github.ref == 'refs/heads/stable'
-          )
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
-        run: |
-          python3 -m pip install dropbox==11.23.0
-          fsbuild/upload
